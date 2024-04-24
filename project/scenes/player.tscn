@@ -1,0 +1,52 @@
+[gd_scene load_steps=5 format=3 uid="uid://bc37hsab1oryu"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_oqnvx"]
+[ext_resource type="Texture2D" uid="uid://bbwh7gaj78675" path="res://assets/monochrome-transparent_packed.png" id="2_gwr0p"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wjjtf"]
+radius = 8.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ebkbl"]
+size = Vector2(16, 20)
+
+[node name="player" type="CharacterBody2D" groups=["player"]]
+motion_mode = 1
+script = ExtResource("1_oqnvx")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(0, 0.6, 0.858824, 1)
+texture_filter = 1
+texture_repeat = 1
+texture = ExtResource("2_gwr0p")
+region_enabled = true
+region_rect = Rect2(560, 224, 16, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_wjjtf")
+
+[node name="hinge" type="Node2D" parent="."]
+
+[node name="parry_area" type="Area2D" parent="hinge" groups=["player"]]
+position = Vector2(16, 2.08165e-12)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hinge/parry_area"]
+shape = SubResource("RectangleShape2D_ebkbl")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="hinge/parry_area"]
+self_modulate = Color(0, 0.6, 0.858824, 1)
+texture_filter = 1
+texture_repeat = 1
+offset_left = -8.0
+offset_top = -10.0
+offset_right = 8.0
+offset_bottom = 10.0
+texture = ExtResource("2_gwr0p")
+region_rect = Rect2(306, 257, 12, 14)
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
